@@ -1,0 +1,2 @@
+ARG PHP_BASE_IMAGE_VERSION=7.3-fpm
+FROM yiisoftware/yii2-php:${PHP_BASE_IMAGE_VERSION}

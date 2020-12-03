@@ -1,0 +1,53 @@
+version: '3.7'
+networks:
+  default:
+    driver: bridge
+services:
+  php:
+    build:
+      dockerfile: Dockerfile
+      context: 'php'
+    image: mytest_php
+    networks:
+      - default
+    environment:
+      - PHP_ENABLE_XDEBUG
+      - TEST_RUNTIME_PATH=/tmp/runtime
+      - PHP_FPM_LISTEN=/var/run/php-fpm.sock
+      - PHP_FPM_PM_STATUS_PATH=/status
+    depends_on:
+      - db
+    volumes:
+      - ./tests:/tests:delegated
+      - ../app:/app:delegated
+      - ~/.composer-docker/cache:/root/.composer/cache:delegated
+      - phpsocket:/var/run
+  web:
+    build:
+      dockerfile: Dockerfile
+      context: 'nginx'
+    image: mytest_nginx
+    networks:
+      - default
+    depends_on:
+      - php
+    ports:
+      - 8123:80
+    volumes:
+      # Application testing
+      - ../app:/app:delegated
+      - phpsocket:/var/run
+  db:
+    image: mysql:5.7
+    networks:
+      - default
+    ports:
+      - 33666:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: yii2basic
+    volumes:
+      - "./database:/var/lib/mysql"
+    command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci', '--default-authentication-plugin=mysql_native_password']
+volumes:
+  phpsocket:
