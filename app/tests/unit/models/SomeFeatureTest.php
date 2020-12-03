@@ -41,7 +41,6 @@ class SomeFeatureTest extends \Codeception\Test\Unit
     }
 
     /**
-     * @skip Test skip Exception test
      * @throws Exception
      */
     public function testSomeFeature()

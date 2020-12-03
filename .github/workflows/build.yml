@@ -87,4 +87,3 @@ jobs:
           vendor/bin/codecept run
         shell: bash
         working-directory: app
-        continue-on-error: true
