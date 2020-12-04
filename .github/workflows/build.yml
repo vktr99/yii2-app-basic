@@ -4,11 +4,6 @@ on:
       - "asd_master"
     paths-ignore:
       - "**.md"
-  push:
-    branches-ignore:
-      - "asd_master"
-    paths-ignore:
-      - "**.md"
 
 name: build
 
