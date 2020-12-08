@@ -23,7 +23,7 @@ jobs:
 
   tests:
     needs: vars
-    if: false == contains( fromJSON(needs.vars.outputs.ignored-branches), github.head_ref)
+    if: false == contains( fromJSON( ${{needs.vars.outputs.ignored-branches}} ), github.head_ref)
     name: PHP ${{ matrix.php }} - ${{ matrix.os }}
 
     env:
