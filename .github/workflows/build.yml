@@ -12,16 +12,18 @@ jobs:
   vars:
     name: Init Variables
     runs-on: ubuntu-latest
+    outputs:
+      ignored-branches: ${{ steps.vars.ignored-branches }}
     steps:
       - name: output variables
-        id: container
+        id: vars
         run: |
           branches=$env.ignored-branches
-          echo ::set-output name=ignored-branches=${branches}
+          echo ::set-output name=ignored-branches::${branches}
 
   tests:
     needs: vars
-    if: false == contains( fromJSON(needs.vars.container.ignored-branches), github.head_ref)
+    if: false == contains( fromJSON(needs.vars.outputs.ignored-branches), github.head_ref)
     name: PHP ${{ matrix.php }} - ${{ matrix.os }}
 
     env:
