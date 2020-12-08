@@ -5,18 +5,22 @@ on:
     paths-ignore:
       - "**.md"
 
+env:
+  ignored-branches: '["asd_master", "dsa_master", "bda_master"]'
+
 jobs:
   vars:
     name: Init variables
     runs-on: ubuntu-latest
-    env:
-      ignored-branches: '["asd_master", "dsa_master", "bda_master"]'
     steps:
-      - name: Init job
+      - name: Set Variables as Output
+        id: vars
+        shell: bash
+        run: echo ::set-output name=ignored-branches::${env.ignored-branches}
 
   tests:
     needs: vars
-    if: ${{ contains( fromJSON(needs.vars.env.ignored-branches), github.head_ref) }}
+    if: ${{ contains( fromJSON(needs.vars.step.vars.output.ignored-branches), github.head_ref) }}
     name: PHP ${{ matrix.php }} - ${{ matrix.os }}
 
     env:
