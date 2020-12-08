@@ -11,6 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       ignored-branches: '["asd_master", "dsa_master", "bda_master"]'
+    steps:
+      - name: Init job
 
   tests:
     needs: vars
