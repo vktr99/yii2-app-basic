@@ -18,7 +18,7 @@ jobs:
       - name: output variables
         id: vars
         run: |
-          branches=$env.ignored-branches
+          branches=$ignored-branches
           echo ::set-output name=ignored-branches::${branches}
 
   tests:
