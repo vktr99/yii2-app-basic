@@ -6,7 +6,7 @@ on:
       - "**.md"
 
 env:
-  ignored-branches: '["asd_master", "dsa_master"]'
+  ignored_branches: '["asd_master", "dsa_master"]'
 
 jobs:
   vars:
@@ -18,7 +18,7 @@ jobs:
       - name: output variables
         id: vars
         run: |
-          branches=$ignored-branches
+          branches="'$ignored_branches'"
           echo ::set-output name=ignored::${branches}
 
   tests:
