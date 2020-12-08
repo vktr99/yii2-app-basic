@@ -13,7 +13,7 @@ jobs:
     name: Init Variables
     runs-on: ubuntu-latest
     outputs:
-      ignored-branches: ${{ steps.vars.outputs.ignored-branches }}
+      ignored: ${{ steps.vars.outputs.ignored-branches }}
     steps:
       - name: output variables
         id: vars
@@ -23,7 +23,7 @@ jobs:
 
   tests:
     needs: vars
-    if: false == contains( fromJSON( ${{needs.vars.outputs.ignored-branches}} ), github.head_ref)
+    if: false == contains( fromJSON( ${{needs.vars.outputs.ignored}} ), github.head_ref)
     name: PHP ${{ matrix.php }} - ${{ matrix.os }}
 
     env:
@@ -43,7 +43,7 @@ jobs:
     steps:
       - name: Debug
         run: |
-          echo fromJSON( ${{needs.vars.outputs.ignored-branches}} )
+          echo fromJSON( ${{needs.vars.outputs.ignored}} )
 
       - name: Checkout
         uses: actions/checkout@v2
