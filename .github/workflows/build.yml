@@ -10,7 +10,7 @@ env:
 
 jobs:
   tests:
-    if: contains( ${{ fromJSON( env.ignored-branches ) }} , github.head_ref)
+    if: contains( ${{ fromJSON( ${{ env.ignored-branches }} ) }} , github.head_ref)
     name: PHP ${{ matrix.php }} - ${{ matrix.os }}
 
     env:
