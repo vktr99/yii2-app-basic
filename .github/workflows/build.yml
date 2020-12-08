@@ -20,7 +20,6 @@ jobs:
         run: |
           branches="'$ignored-branches'"
           echo ::set-output name=ignored-branches::${branches}
-          echo ${{ steps.vars.outputs.ignored-branches }}
 
   tests:
     needs: vars
@@ -42,6 +41,10 @@ jobs:
           - "7.3"
 
     steps:
+      - name: Debug
+        run: |
+          echo fromJSON( ${{needs.vars.outputs.ignored-branches}} )
+
       - name: Checkout
         uses: actions/checkout@v2
 
