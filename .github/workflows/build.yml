@@ -18,7 +18,7 @@ jobs:
       - name: output variables
         id: vars
         run: |
-          branches="'$ignored_branches'"
+          branches=$ignored_branches
           echo ::set-output name=ignored::${branches}
 
   tests:
