@@ -20,6 +20,7 @@ jobs:
         run: |
           branches="'$ignored-branches'"
           echo ::set-output name=ignored-branches::${branches}
+          echo steps.vars.outputs.ignored-branches
 
   tests:
     needs: vars
