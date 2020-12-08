@@ -1,7 +1,5 @@
 on:
   pull_request:
-    branches-ignore:
-      - 'asd_master'
     paths-ignore:
       - "**.md"
 
@@ -9,6 +7,7 @@ name: build
 
 jobs:
   tests:
+    if: github.head_ref != 'asd_master'
     name: PHP ${{ matrix.php }} - ${{ matrix.os }}
 
     env:
