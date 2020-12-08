@@ -50,8 +50,12 @@ jobs:
         run: echo Condition works!
 
       - name: Debug Json
+        with:
+          json1: fromJSON( ${{ needs.vars.outputs.ignored }}
         if: ${{ needs.vars.outputs.ignored }} == '["asd_master", "dsa_master"]'
-        run: echo Json equals
+        run: |
+          echo Json equals
+          echo $INPUT_JSON1
 
       - name: Checkout
         uses: actions/checkout@v2
