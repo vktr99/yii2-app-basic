@@ -1,13 +1,16 @@
+name: build
+
 on:
   pull_request:
     paths-ignore:
       - "**.md"
 
-name: build
+env:
+  ignored-branches: '["asd_master", "dsa_master", "bda_master"]'
 
 jobs:
   tests:
-    if: github.head_ref != 'asd_master'
+    if: contains( ${{ fromJSON( env.ignored-branches ) }} , github.head_ref)
     name: PHP ${{ matrix.php }} - ${{ matrix.os }}
 
     env:
