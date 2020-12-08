@@ -13,7 +13,7 @@ jobs:
     name: Init Variables
     runs-on: ubuntu-latest
     outputs:
-      ignored-branches: ${{ steps.vars.ignored-branches }}
+      ignored-branches: ${{ steps.vars.outputs.ignored-branches }}
     steps:
       - name: output variables
         id: vars
