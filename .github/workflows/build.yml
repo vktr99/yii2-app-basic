@@ -45,6 +45,14 @@ jobs:
         run: |
           echo ${{ needs.vars.outputs.ignored }}
 
+      - name: Debug codition
+        if: false == contains( fromJSON( '["asd_master", "dsa_master"]' ), github.head_ref)
+        run: echo Condition works!
+
+      - name: Debug Json
+        if: ${{ needs.vars.outputs.ignored }} == '["asd_master", "dsa_master"]'
+        run: echo Json equals
+
       - name: Checkout
         uses: actions/checkout@v2
 
