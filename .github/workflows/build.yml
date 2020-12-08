@@ -16,7 +16,9 @@ jobs:
       - name: Set Variables as Output
         id: vars
         shell: bash
-        run: echo ::set-output name=ignored-branches::${env.ignored-branches}
+        run: |
+          branches=$env.ignored-branches
+          echo ::set-output name=ignored-branches::${branches}
 
   tests:
     needs: vars
