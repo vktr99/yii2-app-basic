@@ -6,6 +6,9 @@ on:
     paths-ignore:
       - "**.md"
 
+
+#l10n branch
+
 jobs:
   echo:
     if: github.head_ref != 'l10n_master'
