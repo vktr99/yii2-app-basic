@@ -10,7 +10,14 @@ on:
 
 #akjdhkashdkahdka
 
-env:
-  ignored_branches: '["asd_master", "dsa_master"]'
 
 jobs:
+  echo:
+    if: github.head_ref != 'l10n_master'
+    name: test echo action
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Echo
+        run: echo "Test running!"
