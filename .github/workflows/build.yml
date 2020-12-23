@@ -6,6 +6,8 @@ on:
     paths-ignore:
       - "**.md"
 
+#testing gh actions changes
+
 env:
   ignored_branches: '["asd_master", "dsa_master"]'
 
